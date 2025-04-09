@@ -8,8 +8,8 @@ class FakeTripsRepository {
                     [
                         {
                             id: 1,
-                            imageUrl: "https://upload.wikimedia.org/wikipedia/commons/e/e6/Paris_Night.jpg",
-                            destination: "Paris, France",
+                            imageUrl: "https://res.cloudinary.com/lastminute-contenthub/image/upload/w_100/h_100/v1/DAM/PPC/Countries/Italy/shutterstock_233002423.jpg",
+                            destination: "Milan, Italy",
                             startDate: "2023-11-01",
                             endDate: "2023-11-07",
                             amountOfTravellers: 2,
@@ -17,8 +17,8 @@ class FakeTripsRepository {
                         },
                         {
                             id: 2,
-                            imageUrl: "https://upload.wikimedia.org/wikipedia/commons/0/0c/Tokyo_Tower_and_surrounding_area.jpg",
-                            destination: "Tokyo, Japan",
+                            imageUrl: "https://res.cloudinary.com/lastminute-contenthub/image/upload/w_100/h_100/v1/DAM/Photos/Destinations/Europe/UK/London/eyeem-23764952-52264234.jpg",
+                            destination: "London, UK",
                             startDate: "2023-12-15",
                             endDate: "2023-12-25",
                             amountOfTravellers: 4,
@@ -26,8 +26,8 @@ class FakeTripsRepository {
                         },
                         {
                             id: 3,
-                            imageUrl: "https://upload.wikimedia.org/wikipedia/commons/4/47/New_york_times_square-terabass.jpg",
-                            destination: "New York, USA",
+                            imageUrl: "https://res.cloudinary.com/lastminute-contenthub/image/upload/w_100/h_100/v1/DAM/PPC/Countries/Germany/shutterstock_314150234.jpg",
+                            destination: "Berlin, Germany",
                             startDate: "2024-01-10",
                             endDate: "2024-01-15",
                             amountOfTravellers: 1,
