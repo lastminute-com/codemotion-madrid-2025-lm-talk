@@ -1,7 +1,8 @@
-import {FlatList, StyleSheet, Text, View} from "react-native";
+import {FlatList, Image, StyleSheet, Text, View} from "react-native";
 import {useEffect} from "react";
 import tripsStore from "@/features/trips/domain/state/tripsStore";
 import loadTrips from "@/features/trips/domain/usecase/loadTrips";
+import TripListItem from "@/features/trips/ui/TripListItem";
 
 const TripsListView = () => {
   const trips = tripsStore(s => s.trips)
@@ -17,10 +18,7 @@ const TripsListView = () => {
           data={trips}
           keyExtractor={(item) => item.id.toString()}
           renderItem={({item}) => (
-            <View style={{padding: 20, borderBottomWidth: 1, borderBottomColor: '#ccc'}}>
-              <Text>{item.destination}</Text>
-              <Text>{item.startDate}</Text>
-            </View>
+            <TripListItem item={item} />
           )}
       ></FlatList>
     </View>
@@ -30,14 +28,14 @@ const TripsListView = () => {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    alignItems: 'center',
     justifyContent: 'center',
-    padding: 20,
   },
   title: {
     fontSize: 24,
     fontWeight: 'bold',
     marginBottom: 20,
+    marginTop: 50,
+    alignSelf: 'center'
   }
 })
 
