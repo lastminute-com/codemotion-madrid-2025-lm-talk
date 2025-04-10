@@ -1,7 +1,7 @@
 import type Trip from "@/features/trips/domain/model/Trip";
 
 type TripsState = {
-    trips: Trip[] | undefined
+  trips: Trip[]
 }
 
 export default TripsState

@@ -1,5 +1,5 @@
-import {FlatList, Image, StyleSheet, Text, View} from "react-native";
-import {useEffect} from "react";
+import {ActivityIndicator, FlatList, Image, RefreshControl, StyleSheet, Text, View} from "react-native";
+import React, {useEffect} from "react";
 import tripsStore from "@/features/trips/domain/state/tripsStore";
 import loadTrips from "@/features/trips/domain/usecase/loadTrips";
 import TripListItem from "@/features/trips/ui/TripListItem";
@@ -11,24 +11,25 @@ const TripsListView = () => {
     loadTrips()
   }, []);
 
-  return (
+  return trips.length > 0 ? (
     <View style={styles.container}>
       <Text style={styles.title}>My trips</Text>
       <FlatList
-          data={trips}
-          keyExtractor={(item) => item.id.toString()}
-          renderItem={({item}) => (
-            <TripListItem item={item} />
-          )}
-      ></FlatList>
+        data={trips}
+        keyExtractor={(item) => item.id.toString()}
+        renderItem={({item}) => (
+          <TripListItem item={item} />
+        )}
+      />
     </View>
-  )
+  ) : <ActivityIndicator size="large" />
 }
 
 const styles = StyleSheet.create({
   container: {
     flex: 1,
     justifyContent: 'center',
+    backgroundColor: "#fff",
   },
   title: {
     fontSize: 24,
