@@ -1,7 +1,9 @@
-import FakeUserRepository from "@/features/user/data/repository/FakeUserRepository";
 import profileStore from "@/features/user/domain/state/profileStore";
+// TODO remove data dependency on our domain
+import FakeUserRepository from "@/features/user/data/repository/FakeUserRepository";
 
 const loadUser = async (): Promise<void> => {
+  // TODO we shouldn't be instantiating the repository here
   const repository  = new FakeUserRepository()
 
   // fetch user profile
