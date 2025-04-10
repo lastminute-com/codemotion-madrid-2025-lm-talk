@@ -1,43 +1,50 @@
 import type Trip from "@/features/trips/domain/model/Trip";
+import type Profile from "@/features/user/domain/model/Profile";
+
+const FAKE_TRIPS_FOR_PROFILE: Trip[] = [
+  {
+    id: 1,
+    imageUrl: "https://res.cloudinary.com/lastminute-contenthub/image/upload/w_100/h_100/v1/DAM/PPC/Countries/Italy/shutterstock_233002423.jpg",
+    destination: "Milan, Italy",
+    startDate: "2023-11-01",
+    endDate: "2023-11-07",
+    amountOfTravellers: 2,
+    nights: 6,
+  },
+  {
+    id: 2,
+    imageUrl: "https://res.cloudinary.com/lastminute-contenthub/image/upload/w_100/h_100/v1/DAM/Photos/Destinations/Europe/UK/London/eyeem-23764952-52264234.jpg",
+    destination: "London, UK",
+    startDate: "2023-12-15",
+    endDate: "2023-12-25",
+    amountOfTravellers: 4,
+    nights: 10,
+  },
+  {
+    id: 3,
+    imageUrl: "https://res.cloudinary.com/lastminute-contenthub/image/upload/w_100/h_100/v1/DAM/PPC/Countries/Germany/shutterstock_314150234.jpg",
+    destination: "Berlin, Germany",
+    startDate: "2024-01-10",
+    endDate: "2024-01-15",
+    amountOfTravellers: 1,
+    nights: 5,
+  },
+]
+
+const FAKE_TRIPS_MAP: Record<number, Trip[]> = {
+  123: FAKE_TRIPS_FOR_PROFILE
+}
 
 class FakeTripsRepository {
-    getTrips(): Promise<Trip[]> {
-        return new Promise((resolve) => {
-            setTimeout(() => {
-                resolve(
-                    [
-                        {
-                            id: 1,
-                            imageUrl: "https://res.cloudinary.com/lastminute-contenthub/image/upload/w_100/h_100/v1/DAM/PPC/Countries/Italy/shutterstock_233002423.jpg",
-                            destination: "Milan, Italy",
-                            startDate: "2023-11-01",
-                            endDate: "2023-11-07",
-                            amountOfTravellers: 2,
-                            nights: 6,
-                        },
-                        {
-                            id: 2,
-                            imageUrl: "https://res.cloudinary.com/lastminute-contenthub/image/upload/w_100/h_100/v1/DAM/Photos/Destinations/Europe/UK/London/eyeem-23764952-52264234.jpg",
-                            destination: "London, UK",
-                            startDate: "2023-12-15",
-                            endDate: "2023-12-25",
-                            amountOfTravellers: 4,
-                            nights: 10,
-                        },
-                        {
-                            id: 3,
-                            imageUrl: "https://res.cloudinary.com/lastminute-contenthub/image/upload/w_100/h_100/v1/DAM/PPC/Countries/Germany/shutterstock_314150234.jpg",
-                            destination: "Berlin, Germany",
-                            startDate: "2024-01-10",
-                            endDate: "2024-01-15",
-                            amountOfTravellers: 1,
-                            nights: 5,
-                        },
-                    ]
-                );
-            }, 1000);
-        });
-    }
+  getTripsFor(profile: Profile): Promise<Trip[]> {
+    return new Promise((resolve) => {
+      setTimeout(() => {
+        resolve(
+          FAKE_TRIPS_MAP[profile.id]
+        );
+      }, 1000);
+    });
+  }
 }
 
 export default FakeTripsRepository;
