@@ -3,6 +3,7 @@ import React, {useEffect} from "react";
 import tripsStore from "@/features/trips/domain/state/tripsStore";
 import loadTrips from "@/features/trips/domain/usecase/loadTrips";
 import TripListItem from "@/features/trips/ui/TripListItem";
+import LoadingLayout from "@/core/ui/LoadingLayout";
 
 const TripsListView = () => {
   const trips = tripsStore(s => s.trips)
@@ -11,18 +12,20 @@ const TripsListView = () => {
     loadTrips()
   }, []);
 
-  return trips.length > 0 ? (
-    <View style={styles.container}>
-      <Text style={styles.title}>My trips</Text>
-      <FlatList
-        data={trips}
-        keyExtractor={(item) => item.id.toString()}
-        renderItem={({item}) => (
-          <TripListItem item={item} />
-        )}
-      />
-    </View>
-  ) : <ActivityIndicator size="large" />
+  return (
+    <LoadingLayout isLoading={trips.length === 0}>
+      <View style={styles.container}>
+        <Text style={styles.title}>My trips</Text>
+        <FlatList
+          data={trips}
+          keyExtractor={(item) => item.id.toString()}
+          renderItem={({item}) => (
+            <TripListItem item={item} />
+          )}
+        />
+      </View>
+    </LoadingLayout>
+  )
 }
 
 const styles = StyleSheet.create({

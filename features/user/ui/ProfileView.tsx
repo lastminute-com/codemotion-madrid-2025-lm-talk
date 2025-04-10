@@ -3,6 +3,7 @@ import {ActivityIndicator, Image, StyleSheet, Text, View} from 'react-native'
 
 import loadUser from "@/features/user/domain/usecase/loadUser";
 import profileStore from "@/features/user/domain/state/profileStore";
+import LoadingLayout from "@/core/ui/LoadingLayout";
 
 const ProfileView = () => {
   const loggedUser = profileStore(s => s.loggedUser)
@@ -11,12 +12,14 @@ const ProfileView = () => {
     loadUser()
   }, []);
 
-  return loggedUser ? (
-    <View style={styles.container}>
-      <Image style={styles.avatar} src={loggedUser?.avatarUrl} />
-      <Text style={styles.title}>{loggedUser?.username}</Text>
-    </View>
-  ) : <ActivityIndicator size="large" />
+  return (
+    <LoadingLayout isLoading={!loggedUser}>
+      <View style={styles.container}>
+        <Image style={styles.avatar} src={loggedUser?.avatarUrl} />
+        <Text style={styles.title}>{loggedUser?.username}</Text>
+      </View>
+    </LoadingLayout>
+  )
 }
 
 const styles = StyleSheet.create({
