@@ -1,6 +1,6 @@
 import {ActivityIndicator, FlatList, Image, RefreshControl, StyleSheet, Text, View} from "react-native";
 import React, {useEffect} from "react";
-import tripsStore from "@/src/features/trips/domain/state/tripsStore";
+import tripsStore from "@/src/features/trips/data/state/tripsStore";
 import loadTrips from "@/src/features/trips/domain/usecase/loadTrips";
 import TripListItem from "@/src/features/trips/ui/TripListItem";
 import LoadingLayout from "@/src/core/ui/LoadingLayout";
