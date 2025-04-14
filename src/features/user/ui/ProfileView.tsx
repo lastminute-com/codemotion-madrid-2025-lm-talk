@@ -1,7 +1,8 @@
 import React, {useEffect} from 'react'
-import {ActivityIndicator, Image, StyleSheet, Text, View} from 'react-native'
+import {Image, StyleSheet, Text, View} from 'react-native'
 
 import loadUser from "@/src/features/user/domain/usecase/loadUser";
+// TODO Now UI depends on Data (which is not good, but also not bad)
 import profileStore from "@/src/features/user/data/state/profileStore";
 import LoadingLayout from "@/src/core/ui/LoadingLayout";
 
@@ -9,7 +10,7 @@ const ProfileView = () => {
   const loggedUser = profileStore(s => s.loggedUser)
 
   useEffect(() => {
-    loadUser()
+    loadUser(profileStore)
   }, []);
 
   return (

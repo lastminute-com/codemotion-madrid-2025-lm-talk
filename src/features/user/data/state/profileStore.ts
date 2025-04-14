@@ -1,4 +1,4 @@
-import { createWithEqualityFn } from "zustand/traditional";
+import {createWithEqualityFn, UseBoundStoreWithEqualityFn} from "zustand/traditional";
 import {shallow} from "zustand/vanilla/shallow";
 
 import type ProfileState from "@/src/features/user/domain/model/ProfileState";
