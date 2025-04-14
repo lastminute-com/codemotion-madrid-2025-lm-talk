@@ -1,17 +1,24 @@
-import profileStore from "@/src/features/user/domain/state/profileStore";
 // TODO remove data dependency on our domain
-import FakeUserRepository from "@/src/features/user/data/repository/FakeUserRepository";
+import profileStore from "@/src/features/user/data/state/profileStore";
+import type Profile from "@/src/features/user/domain/model/Profile";
+
+const FAKE_USER_PROFILE: Profile = {
+  id: 123,
+  username: "Ale Weichandt",
+  avatarUrl: "https://lh3.googleusercontent.com/a/ACg8ocIMmlc4NsAUreY5yb3VIBRSv5LdHUeX3vJyA7cySgF_w4Qupc0=s288-c-no",
+}
 
 const loadUser = async (): Promise<void> => {
-  // TODO we shouldn't be instantiating the repository here
-  const repository  = new FakeUserRepository()
+  // TODO we shouldn't be instantiating the store here (and the other uses too)
+  const user = profileStore.getState().loggedUser;
 
-  // fetch user profile
-  const profile = await repository.getCurrentProfile()
+  if (user) {
+    return;
+  }
 
   // load it into the store
   profileStore.setState({
-    loggedUser: profile
+    loggedUser: FAKE_USER_PROFILE
   })
 }
 

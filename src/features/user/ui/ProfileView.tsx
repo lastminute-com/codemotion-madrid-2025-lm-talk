@@ -2,7 +2,7 @@ import React, {useEffect} from 'react'
 import {ActivityIndicator, Image, StyleSheet, Text, View} from 'react-native'
 
 import loadUser from "@/src/features/user/domain/usecase/loadUser";
-import profileStore from "@/src/features/user/domain/state/profileStore";
+import profileStore from "@/src/features/user/data/state/profileStore";
 import LoadingLayout from "@/src/core/ui/LoadingLayout";
 
 const ProfileView = () => {
