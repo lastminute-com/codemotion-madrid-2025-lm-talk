@@ -9,7 +9,6 @@ const FAKE_USER_PROFILE: Profile = {
 const loadUser = async (
     profileStore: ProfileStore,
 ): Promise<void> => {
-  // TODO we shouldn't be instantiating the store here (and the other uses too)
   const user = profileStore.getState().loggedUser;
 
   if (user) {
