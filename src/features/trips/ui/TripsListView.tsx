@@ -1,9 +1,13 @@
 import {FlatList, StyleSheet, Text, View} from "react-native";
 import React, {useEffect} from "react";
-import tripsStore from "@/src/features/trips/data/state/tripsStore";
-import loadTrips from "@/src/features/trips/domain/usecase/loadTrips";
 import TripListItem from "@/src/features/trips/ui/TripListItem";
 import LoadingLayout from "@/src/core/ui/LoadingLayout";
+/**
+ * All injections should come from index files
+ */
+// TODO Now UI depends on Data (which is not good, but also not bad)
+import { tripsStore } from "@/src/features/trips/data/provisions";
+import { loadTrips } from "@/src/features/trips/domain/provisions";
 
 const TripsListView = () => {
   const trips = tripsStore(s => s.trips)
