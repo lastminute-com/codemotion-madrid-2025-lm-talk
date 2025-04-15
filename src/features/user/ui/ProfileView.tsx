@@ -6,14 +6,14 @@ import LoadingLayout from "@/src/core/ui/LoadingLayout";
  * All injections should come from index files
  */
 // TODO Now UI depends on Data (which is not good, but also not bad)
-import {profileStore} from "@/src/features/user/data/provisions";
-import { loadUser } from "@/src/features/user/domain/provisions";
+import { profileStore } from "@/src/features/user/data/provisions";
+import { loadUser } from "@/src/features/user/ui/provisions";
 
 const ProfileView = () => {
   const loggedUser = profileStore(s => s.loggedUser)
 
   useEffect(() => {
-    loadUser(profileStore)
+    loadUser()
   }, []);
 
   return (

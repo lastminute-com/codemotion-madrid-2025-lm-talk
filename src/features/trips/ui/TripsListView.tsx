@@ -7,13 +7,13 @@ import LoadingLayout from "@/src/core/ui/LoadingLayout";
  */
 // TODO Now UI depends on Data (which is not good, but also not bad)
 import { tripsStore } from "@/src/features/trips/data/provisions";
-import { loadTrips } from "@/src/features/trips/domain/provisions";
+import { loadTrips } from "@/src/features/trips/ui/provisions";
 
 const TripsListView = () => {
   const trips = tripsStore(s => s.trips)
 
   useEffect(() => {
-    loadTrips(tripsStore)
+    loadTrips()
   }, []);
 
   return (
