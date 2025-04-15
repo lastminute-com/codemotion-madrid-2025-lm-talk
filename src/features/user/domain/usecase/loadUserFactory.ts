@@ -6,19 +6,20 @@ const FAKE_USER_PROFILE: Profile = {
   avatarUrl: "https://lh3.googleusercontent.com/a/ACg8ocIMmlc4NsAUreY5yb3VIBRSv5LdHUeX3vJyA7cySgF_w4Qupc0=s288-c-no",
 }
 
-const loadUser = async (
+const loadUserFactory = (
     profileStore: ProfileStore,
-): Promise<void> => {
-  const user = profileStore.getState().loggedUser;
+) =>
+  async function loadUser(): Promise<void> {
+    const user = profileStore.getState().loggedUser;
 
-  if (user) {
-    return;
+    if (user) {
+      return;
+    }
+
+    // load it into the store
+    profileStore.setState({
+      loggedUser: FAKE_USER_PROFILE
+    })
   }
 
-  // load it into the store
-  profileStore.setState({
-    loggedUser: FAKE_USER_PROFILE
-  })
-}
-
-export default loadUser;
+export default loadUserFactory;
