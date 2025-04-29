@@ -1,15 +1,21 @@
 import React, {useEffect} from 'react'
 import {Image, StyleSheet, Text, View} from 'react-native'
-
+import type {UseBoundStore} from "zustand/react";
+import slContainer from "@/src/core/domain/di/slContainer";
+import keys from "@/src/features/user/domain/di/keys";
+import type {LoadUser} from "@/src/features/user/domain/usecase/loadUser";
+import type ProfileStore from "@/src/features/user/domain/model/ProfileStore";
 import LoadingLayout from "@/src/core/ui/LoadingLayout";
+
 /**
- * All injections should come from index files
+ * We cast the store to use a hook to simplify the example.
+ * Maybe creating a different provision for the store hook is not a bad idea.
  */
-// TODO Now UI depends on Data (which is not good, but also not bad)
-import { profileStore } from "@/src/features/user/data/provisions";
-import { loadUser } from "@/src/features/user/ui/provisions";
+type UseProfileStore = UseBoundStore<ProfileStore>
 
 const ProfileView = () => {
+  const loadUser = slContainer.get<LoadUser>(keys.loadUser);
+  const profileStore = slContainer.get<UseProfileStore>(keys.profileStore);
   const loggedUser = profileStore(s => s.loggedUser)
 
   useEffect(() => {
