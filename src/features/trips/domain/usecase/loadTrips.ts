@@ -1,5 +1,7 @@
 import type Trip from "@/src/features/trips/domain/model/Trip";
-import type {TripsStore} from "@/src/features/trips/domain/model/TripsStore";
+import type TripsStore from "@/src/features/trips/domain/model/TripsStore";
+import slContainer from "@/src/core/domain/di/slContainer";
+import keys from "@/src/features/trips/domain/di/keys";
 
 const FAKE_TRIPS_FOR_PROFILE: Trip[] = [
   {
@@ -31,10 +33,15 @@ const FAKE_TRIPS_FOR_PROFILE: Trip[] = [
   },
 ]
 
-const loadTripsFactory = (
-    tripsStore: TripsStore
-) =>
-  async function loadTrips(): Promise<void> {
+async function loadTrips(): Promise<void> {
+    /**
+     * Use service locator to get data implementation of our TripsStore type definition.
+     * This implies now the slContainer is a direct dependency of this module.
+     *
+     * keys.tripsStore must be provided before loadTrips
+     */
+    const tripsStore = slContainer.get<TripsStore>(keys.tripsStore);
+
     const trips = tripsStore.getState().trips;
 
     if (trips.length) {
@@ -45,7 +52,11 @@ const loadTripsFactory = (
     tripsStore.setState({
       trips: FAKE_TRIPS_FOR_PROFILE
     })
-  }
+}
 
-export default loadTripsFactory;
+export default loadTrips;
 
+/**
+ * We need to define the interface of our use case for DI purpose.
+ */
+export type LoadTrips = typeof loadTrips;
