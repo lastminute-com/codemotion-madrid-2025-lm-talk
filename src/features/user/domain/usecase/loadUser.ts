@@ -1,6 +1,6 @@
 import type Profile from "@/src/features/user/domain/model/Profile";
 import type ProfileStore from "@/src/features/user/domain/model/ProfileStore";
-import slContainer from "@/src/core/domain/di/slContainer";
+import diContainer from "@/src/core/domain/di/diContainer";
 import keys from "@/src/features/user/domain/di/keys";
 
 const FAKE_USER_PROFILE: Profile = {
@@ -16,7 +16,7 @@ async function loadUser(): Promise<void> {
    *
    * keys.profileStore must be provided before loadUser
    */
-  const profileStore = slContainer.get<ProfileStore>(keys.profileStore);
+  const profileStore = diContainer.get<ProfileStore>(keys.profileStore);
 
   const user = profileStore.getState().loggedUser;
   if (user) {

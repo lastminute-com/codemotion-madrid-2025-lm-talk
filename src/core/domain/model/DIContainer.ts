@@ -1,4 +1,4 @@
-type ServiceLocator = {
+type DIContainer = {
   /**
    * get a provision of type TOut by key
    * @param key
@@ -12,4 +12,4 @@ type ServiceLocator = {
   set<TIn>(key: string, value: TIn): void;
 }
 
-export default ServiceLocator;
+export default DIContainer;
