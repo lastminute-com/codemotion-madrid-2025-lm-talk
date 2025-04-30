@@ -1,8 +1,8 @@
 /**
  * Provides a place to define all your provisions from this module.
  */
-import slContainer from "@/src/core/domain/di/slContainer";
+import diContainer from "@/src/core/domain/di/diContainer";
 import keys from "@/src/features/trips/domain/di/keys";
 import loadTrips from "@/src/features/trips/domain/usecase/loadTrips";
 
-slContainer.set(keys.loadTrips, loadTrips);
+diContainer.set(keys.loadTrips, loadTrips);

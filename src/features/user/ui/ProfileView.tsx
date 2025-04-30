@@ -1,7 +1,7 @@
 import React, {useEffect} from 'react'
 import {Image, StyleSheet, Text, View} from 'react-native'
 import type {UseBoundStore} from "zustand/react";
-import slContainer from "@/src/core/domain/di/slContainer";
+import diContainer from "@/src/core/domain/di/diContainer";
 import keys from "@/src/features/user/domain/di/keys";
 import type {LoadUser} from "@/src/features/user/domain/usecase/loadUser";
 import type ProfileStore from "@/src/features/user/domain/model/ProfileStore";
@@ -14,8 +14,8 @@ import LoadingLayout from "@/src/core/ui/LoadingLayout";
 type UseProfileStore = UseBoundStore<ProfileStore>
 
 const ProfileView = () => {
-  const loadUser = slContainer.get<LoadUser>(keys.loadUser);
-  const profileStore = slContainer.get<UseProfileStore>(keys.profileStore);
+  const loadUser = diContainer.get<LoadUser>(keys.loadUser);
+  const profileStore = diContainer.get<UseProfileStore>(keys.profileStore);
   const loggedUser = profileStore(s => s.loggedUser)
 
   useEffect(() => {

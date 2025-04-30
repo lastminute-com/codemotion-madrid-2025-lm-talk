@@ -1,6 +1,6 @@
 import type Trip from "@/src/features/trips/domain/model/Trip";
 import type TripsStore from "@/src/features/trips/domain/model/TripsStore";
-import slContainer from "@/src/core/domain/di/slContainer";
+import diContainer from "@/src/core/domain/di/diContainer";
 import keys from "@/src/features/trips/domain/di/keys";
 
 const FAKE_TRIPS_FOR_PROFILE: Trip[] = [
@@ -40,7 +40,7 @@ async function loadTrips(): Promise<void> {
      *
      * keys.tripsStore must be provided before loadTrips
      */
-    const tripsStore = slContainer.get<TripsStore>(keys.tripsStore);
+    const tripsStore = diContainer.get<TripsStore>(keys.tripsStore);
 
     const trips = tripsStore.getState().trips;
 

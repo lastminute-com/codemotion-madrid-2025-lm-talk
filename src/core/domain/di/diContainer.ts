@@ -1,8 +1,8 @@
-import type ServiceLocator from "@/src/core/domain/model/ServiceLocator";
+import type DIContainer from "@/src/core/domain/model/DIContainer";
 
 const provisionsMap: Record<string, any> = {}
 
-const slContainer: ServiceLocator = {
+const diContainer: DIContainer = {
   get<TOut>(key: string): TOut {
     const value = provisionsMap[key];
     if (!value) {
@@ -16,4 +16,4 @@ const slContainer: ServiceLocator = {
   },
 };
 
-export default slContainer;
+export default diContainer;
