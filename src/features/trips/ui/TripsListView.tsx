@@ -5,11 +5,17 @@ import LoadingLayout from "@/src/core/ui/LoadingLayout";
 /**
  * All injections should come from index files
  */
-// TODO Now UI depends on Data (which is not good, but also not bad)
-import { tripsStore } from "@/src/features/trips/data/provisions";
-import { loadTrips } from "@/src/features/trips/ui/provisions";
+import type {UseBoundStore} from "zustand/react";
+import slContainer from "@/src/core/domain/di/slContainer";
+import keys from "@/src/features/trips/domain/di/keys";
+import type {LoadTrips} from "@/src/features/trips/domain/usecase/loadTrips";
+import type TripsStore from "@/src/features/trips/domain/model/TripsStore";
+
+type UseTripsStore = UseBoundStore<TripsStore>
 
 const TripsListView = () => {
+  const loadTrips = slContainer.get<LoadTrips>(keys.loadTrips);
+  const tripsStore = slContainer.get<UseTripsStore>(keys.tripsStore);
   const trips = tripsStore(s => s.trips)
 
   useEffect(() => {
