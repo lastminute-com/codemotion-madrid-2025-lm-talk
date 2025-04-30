@@ -1,7 +1,7 @@
 import type Trip from "@/src/features/trips/domain/model/Trip";
 import type TripsStore from "@/src/features/trips/domain/model/TripsStore";
-import diContainer from "@/src/core/domain/di/diContainer";
 import keys from "@/src/features/trips/domain/di/keys";
+import withDependencies from "@/src/core/domain/di/withDependencies";
 
 const FAKE_TRIPS_FOR_PROFILE: Trip[] = [
   {
@@ -33,26 +33,23 @@ const FAKE_TRIPS_FOR_PROFILE: Trip[] = [
   },
 ]
 
-async function loadTrips(): Promise<void> {
-    /**
-     * Use service locator to get data implementation of our TripsStore type definition.
-     * This implies now the slContainer is a direct dependency of this module.
-     *
-     * keys.tripsStore must be provided before loadTrips
-     */
-    const tripsStore = diContainer.get<TripsStore>(keys.tripsStore);
+const loadTripsFactory = (
+  tripsStore: TripsStore
+) => async function loadTrips(
+): Promise<void> {
+  const trips = tripsStore.getState().trips;
 
-    const trips = tripsStore.getState().trips;
+  if (trips.length) {
+    return;
+  }
 
-    if (trips.length) {
-      return;
-    }
-
-    // load it into the store
-    tripsStore.setState({
-      trips: FAKE_TRIPS_FOR_PROFILE
-    })
+  // load it into the store
+  tripsStore.setState({
+    trips: FAKE_TRIPS_FOR_PROFILE
+  })
 }
+
+const loadTrips = withDependencies(loadTripsFactory, keys.tripsStore);
 
 export default loadTrips;
 
