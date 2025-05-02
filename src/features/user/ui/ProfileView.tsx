@@ -3,9 +3,9 @@ import {Image, StyleSheet, Text, View} from 'react-native'
 import type {UseBoundStore} from "zustand/react";
 import diContainer from "@/src/core/domain/di/diContainer";
 import keys from "@/src/features/user/domain/di/keys";
-import type {LoadUser} from "@/src/features/user/domain/usecase/loadUser";
 import type ProfileStore from "@/src/features/user/domain/model/ProfileStore";
 import LoadingLayout from "@/src/core/ui/LoadingLayout";
+import {LoadUser} from "@/src/features/user/domain/di/provisions";
 
 /**
  * We cast the store to use a hook to simplify the example.
