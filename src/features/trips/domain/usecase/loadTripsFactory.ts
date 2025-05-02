@@ -1,7 +1,5 @@
 import type Trip from "@/src/features/trips/domain/model/Trip";
 import type TripsStore from "@/src/features/trips/domain/model/TripsStore";
-import keys from "@/src/features/trips/domain/di/keys";
-import withDependencies from "@/src/core/domain/di/withDependencies";
 
 const FAKE_TRIPS_FOR_PROFILE: Trip[] = [
   {
@@ -49,11 +47,6 @@ const loadTripsFactory = (
   })
 }
 
-const loadTrips = withDependencies(loadTripsFactory, keys.tripsStore);
 
-export default loadTrips;
+export default loadTripsFactory;
 
-/**
- * We need to define the interface of our use case for DI purpose.
- */
-export type LoadTrips = typeof loadTrips;
