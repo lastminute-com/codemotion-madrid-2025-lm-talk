@@ -14,6 +14,9 @@ import {LoadUser} from "@/src/features/user/domain/di/provisions";
 type UseProfileStore = UseBoundStore<ProfileStore>
 
 const ProfileView = () => {
+  /**
+   * TODO: We need to migrate this to work under a di pattern.
+   */
   const loadUser = diContainer.get<LoadUser>(keys.loadUser);
   const profileStore = diContainer.get<UseProfileStore>(keys.profileStore);
   const loggedUser = profileStore(s => s.loggedUser)
