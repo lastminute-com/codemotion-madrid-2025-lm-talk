@@ -14,6 +14,9 @@ import type {LoadTrips} from "@/src/features/trips/domain/di/provisions";
 type UseTripsStore = UseBoundStore<TripsStore>
 
 const TripsListView = () => {
+  /**
+   * TODO: We need to migrate this to work under a di pattern.
+   */
   const loadTrips = diContainer.get<LoadTrips>(keys.loadTrips);
   const tripsStore = diContainer.get<UseTripsStore>(keys.tripsStore);
   const trips = tripsStore(s => s.trips)
