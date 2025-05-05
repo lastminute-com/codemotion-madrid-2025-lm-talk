@@ -1,24 +1,18 @@
 import {FlatList, StyleSheet, Text, View} from "react-native";
 import React, {useEffect} from "react";
+import type {UseBoundStore} from "zustand/react";
 import TripListItem from "@/src/features/trips/ui/TripListItem";
 import LoadingLayout from "@/src/core/ui/LoadingLayout";
-/**
- * All injections should come from index files
- */
-import type {UseBoundStore} from "zustand/react";
-import diContainer from "@/src/core/domain/di/diContainer";
 import keys from "@/src/features/trips/domain/di/keys";
 import type TripsStore from "@/src/features/trips/domain/model/TripsStore";
 import type {LoadTrips} from "@/src/features/trips/domain/di/provisions";
+import useInjection from "@/src/core/ui/di/useInjection";
 
 type UseTripsStore = UseBoundStore<TripsStore>
 
 const TripsListView = () => {
-  /**
-   * TODO: We need to migrate this to work under a di pattern.
-   */
-  const loadTrips = diContainer.get<LoadTrips>(keys.loadTrips);
-  const tripsStore = diContainer.get<UseTripsStore>(keys.tripsStore);
+  const loadTrips = useInjection<LoadTrips>(keys.loadTrips);
+  const tripsStore = useInjection<UseTripsStore>(keys.tripsStore);
   const trips = tripsStore(s => s.trips)
 
   useEffect(() => {

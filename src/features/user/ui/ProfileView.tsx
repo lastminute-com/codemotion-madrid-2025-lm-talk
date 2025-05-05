@@ -1,11 +1,11 @@
 import React, {useEffect} from 'react'
 import {Image, StyleSheet, Text, View} from 'react-native'
 import type {UseBoundStore} from "zustand/react";
-import diContainer from "@/src/core/domain/di/diContainer";
 import keys from "@/src/features/user/domain/di/keys";
 import type ProfileStore from "@/src/features/user/domain/model/ProfileStore";
 import LoadingLayout from "@/src/core/ui/LoadingLayout";
 import {LoadUser} from "@/src/features/user/domain/di/provisions";
+import useInjection from "@/src/core/ui/di/useInjection";
 
 /**
  * We cast the store to use a hook to simplify the example.
@@ -14,11 +14,8 @@ import {LoadUser} from "@/src/features/user/domain/di/provisions";
 type UseProfileStore = UseBoundStore<ProfileStore>
 
 const ProfileView = () => {
-  /**
-   * TODO: We need to migrate this to work under a di pattern.
-   */
-  const loadUser = diContainer.get<LoadUser>(keys.loadUser);
-  const profileStore = diContainer.get<UseProfileStore>(keys.profileStore);
+  const loadUser = useInjection<LoadUser>(keys.loadUser);
+  const profileStore = useInjection<UseProfileStore>(keys.profileStore);
   const loggedUser = profileStore(s => s.loggedUser)
 
   useEffect(() => {
