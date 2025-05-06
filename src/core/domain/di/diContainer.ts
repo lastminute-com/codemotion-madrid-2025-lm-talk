@@ -1,10 +1,11 @@
+import { Container } from 'inversify'
 import type DIContainer from "@/src/core/domain/model/DIContainer";
 
-const provisionsMap: Record<string, any> = {}
+const container = new Container()
 
 const diContainer: DIContainer = {
   get<TOut>(key: string): TOut {
-    const value = provisionsMap[key];
+    const value = container.get<TOut>(key)
     if (!value) {
       throw new Error(`Dependency not found: ${key}`);
     }
@@ -12,7 +13,7 @@ const diContainer: DIContainer = {
   },
 
   set<TIn>(key: string, value: TIn): void {
-    provisionsMap[key] = value;
+    container.bind(key).toConstantValue(value)
   },
 };
 
