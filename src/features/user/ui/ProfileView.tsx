@@ -1,11 +1,9 @@
 import React, {useEffect} from 'react'
 import {Image, StyleSheet, Text, View} from 'react-native'
 import type {UseBoundStore} from "zustand/react";
-import keys from "@/src/features/user/domain/di/keys";
 import type ProfileStore from "@/src/features/user/domain/model/ProfileStore";
 import LoadingLayout from "@/src/core/ui/LoadingLayout";
 import {LoadUser} from "@/src/features/user/domain/di/provisions";
-import useInjection from "@/src/core/ui/di/useInjection";
 
 /**
  * We cast the store to use a hook to simplify the example.
@@ -13,9 +11,15 @@ import useInjection from "@/src/core/ui/di/useInjection";
  */
 type UseProfileStore = UseBoundStore<ProfileStore>
 
-const ProfileView = () => {
-  const loadUser = useInjection<LoadUser>(keys.loadUser);
-  const profileStore = useInjection<UseProfileStore>(keys.profileStore);
+type Props = {
+  loadUser: LoadUser,
+  profileStore: UseProfileStore,
+}
+
+const ProfileView: React.FC<Props> = ({
+  loadUser,
+  profileStore,
+}) => {
   const loggedUser = profileStore(s => s.loggedUser)
 
   useEffect(() => {

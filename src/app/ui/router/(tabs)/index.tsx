@@ -1,5 +1,5 @@
 import React from "react";
-import TripsListView from "@/src/features/trips/ui/TripsListView";
+import {TripsListView} from "@/src/features/trips/ui/di/provisions";
 
 const TripsScreen = ()=> {
   return (<TripsListView />);
