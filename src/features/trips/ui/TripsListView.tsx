@@ -3,16 +3,20 @@ import React, {useEffect} from "react";
 import type {UseBoundStore} from "zustand/react";
 import TripListItem from "@/src/features/trips/ui/TripListItem";
 import LoadingLayout from "@/src/core/ui/LoadingLayout";
-import keys from "@/src/features/trips/domain/di/keys";
 import type TripsStore from "@/src/features/trips/domain/model/TripsStore";
 import type {LoadTrips} from "@/src/features/trips/domain/di/provisions";
-import useInjection from "@/src/core/ui/di/useInjection";
 
 type UseTripsStore = UseBoundStore<TripsStore>
 
-const TripsListView = () => {
-  const loadTrips = useInjection<LoadTrips>(keys.loadTrips);
-  const tripsStore = useInjection<UseTripsStore>(keys.tripsStore);
+type Props = {
+  loadTrips: LoadTrips,
+  tripsStore: UseTripsStore,
+}
+
+const TripsListView = ({
+  loadTrips,
+  tripsStore
+}: Props) => {
   const trips = tripsStore(s => s.trips)
 
   useEffect(() => {
