@@ -2,14 +2,13 @@ import { createWithEqualityFn } from "zustand/traditional";
 import {shallow} from "zustand/vanilla/shallow";
 import type TripsState from "@/src/features/trips/domain/model/TripsState";
 
-
 export const initialState: TripsState = {
-    trips: []
+  trips: []
 }
 
 const tripsStore = createWithEqualityFn<TripsState>()(
-    () => initialState,
-    shallow,
+  () => initialState,
+  shallow,
 )
 
 export default tripsStore;

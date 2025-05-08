@@ -1,6 +1,5 @@
-// TODO remove data dependency on our domain
-import tripsStore from "@/src/features/trips/data/state/tripsStore";
 import type Trip from "@/src/features/trips/domain/model/Trip";
+import type {TripsStore} from "@/src/features/trips/domain/model/TripsStore";
 
 const FAKE_TRIPS_FOR_PROFILE: Trip[] = [
   {
@@ -32,8 +31,9 @@ const FAKE_TRIPS_FOR_PROFILE: Trip[] = [
   },
 ]
 
-const loadTrips = async (): Promise<void> => {
-  // TODO we shouldn't be instantiating the store here (and the other uses too)
+const loadTrips = async (
+    tripsStore: TripsStore
+): Promise<void> => {
   const trips = tripsStore.getState().trips;
 
   if (trips.length) {
