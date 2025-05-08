@@ -1,4 +1,4 @@
-import {ActivityIndicator, FlatList, Image, RefreshControl, StyleSheet, Text, View} from "react-native";
+import {FlatList, StyleSheet, Text, View} from "react-native";
 import React, {useEffect} from "react";
 import tripsStore from "@/src/features/trips/data/state/tripsStore";
 import loadTrips from "@/src/features/trips/domain/usecase/loadTrips";
@@ -9,7 +9,7 @@ const TripsListView = () => {
   const trips = tripsStore(s => s.trips)
 
   useEffect(() => {
-    loadTrips()
+    loadTrips(tripsStore)
   }, []);
 
   return (
