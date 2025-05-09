@@ -31,20 +31,23 @@ const FAKE_TRIPS_FOR_PROFILE: Trip[] = [
   },
 ]
 
-const loadTrips = async (
-    tripsStore: TripsStore
-): Promise<void> => {
-  const trips = tripsStore.getState().trips;
+export type LoadTrips = () => Promise<void>;
 
-  if (trips.length) {
-    return;
+const loadTripsFactory = (
+    tripsStore: TripsStore
+): LoadTrips =>
+  async function loadTrips(): Promise<void> {
+    const trips = tripsStore.getState().trips;
+
+    if (trips.length) {
+      return;
+    }
+
+    // load it into the store
+    tripsStore.setState({
+      trips: FAKE_TRIPS_FOR_PROFILE
+    })
   }
 
-  // load it into the store
-  tripsStore.setState({
-    trips: FAKE_TRIPS_FOR_PROFILE
-  })
-}
-
-export default loadTrips;
+export default loadTripsFactory;
 
