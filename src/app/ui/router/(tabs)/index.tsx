@@ -1,7 +1,9 @@
 import React from "react";
-import TripsListView from "@/src/features/trips/ui/TripsListView";
+import container from "@/src/core/domain/di/container";
+import {TripListViewKey} from "@/src/features/trips/ui/di/keys";
 
 const TripsScreen = ()=> {
+  const TripsListView = container.get(TripListViewKey);
   return (<TripsListView />);
 }
 
