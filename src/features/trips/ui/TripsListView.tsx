@@ -1,17 +1,29 @@
 import {FlatList, StyleSheet, Text, View} from "react-native";
 import React, {useEffect} from "react";
+import type {UseBoundStore} from "zustand/react";
+import type {TripsStore} from "@/src/features/trips/domain/model/TripsStore";
 import tripsStore from "@/src/features/trips/data/state/tripsStore";
 import TripListItem from "@/src/features/trips/ui/TripListItem";
 import LoadingLayout from "@/src/core/ui/LoadingLayout";
-import loadTripsFactory from "@/src/features/trips/domain/usecase/loadTripsFactory";
+import loadTripsFactory, {type LoadTrips} from "@/src/features/trips/domain/usecase/loadTripsFactory";
+
+type TripsStoreHook = UseBoundStore<TripsStore>
+
+type Props = {
+  store?: TripsStoreHook
+  load?: LoadTrips
+}
 
 const loadTrips = loadTripsFactory(tripsStore)
 
-const TripsListView = () => {
-  const trips = tripsStore(s => s.trips)
+const TripsListView: React.FC<Props> = ({
+  store = tripsStore,
+  load = loadTrips,
+}) => {
+  const trips = store(s => s.trips)
 
   useEffect(() => {
-    loadTrips()
+    load()
   }, []);
 
   return (
